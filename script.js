@@ -103,9 +103,16 @@ odjazdy.forEach(autobus => {
     <span class="${klasaKropki}" data-tooltip="${tytulKropki}"></span>
   `;
 
-  pojemnik.appendChild(element);
-});
+    pojemnik.appendChild(element);
 
+      const kropka = element.querySelector('.kropka-api, .kropka-lokalna');
+      if (kropka) {
+        kropka.addEventListener('click', () => {
+          kropka.classList.toggle('aktywny');
+          setTimeout(() => kropka.classList.remove('aktywny'), 2000);
+        });
+      }
+    });
   } catch (blad) {
     console.error("Błąd połączenia:", blad);
     document.getElementById('odjazdy-lista').innerHTML = "Błąd połączenia z serwerem MPK";
