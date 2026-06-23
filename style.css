@@ -107,8 +107,8 @@ h1 {
   transition: opacity 0.2s;
 }
 
-.kropka-api:hover::after,
-.kropka-lokalna:hover::after {
+.kropka-api.aktywny::after,
+.kropka-lokalna.aktywny::after {
   opacity: 1;
 }
 .opoznienie {
