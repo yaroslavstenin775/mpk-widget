@@ -1,0 +1,72 @@
+/* Resetujemy domyślne marginesy przeglądarki */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #121212; /* Ciemne tło, idealne dla Raspberry Pi */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#widget {
+    width: 100%;
+    max-width: 600px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+h1 {
+    color: #ff9800; /* Pomarańczowy kolor przystanku */
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.odjazd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+    font-size: 22px; /* Duża czcionka */
+}
+
+/* Ostatni element nie potrzebuje linii na dole */
+.odjazd:last-child {
+    border-bottom: none;
+}
+
+.linia {
+    background-color: #ff9800;
+    color: #000;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.kierunek {
+    flex-grow: 1;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.czas {
+    color: #4caf50; /* Zielony kolor */
+    font-weight: bold;
+    min-width: 90px; /* Nieco więcej miejsca */
+    text-align: right; /* Wyrównanie do prawej */
+    font-family: 'Courier New', Courier, monospace; /* Czcionka o stałej szerokości */
+    font-variant-numeric: tabular-nums; /* Kluczowe: wyrównuje cyfry w kolumnie */
+    padding-left: 10px;
+}
