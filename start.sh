@@ -12,4 +12,4 @@ xset s off
 xset -dpms
 xset s noblank
 
-chromium-browser --disable-web-security --user-data-dir="/tmp/mpk_kiosk" --kiosk "file:///home/yaroslav/mpk-widget/index.html"
+chromium --disable-web-security --user-data-dir="/tmp/mpk_kiosk" --kiosk "file:///home/yaroslav/mpk-widget/index.html"
