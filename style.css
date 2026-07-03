@@ -126,25 +126,72 @@ h1 {
 ::-webkit-scrollbar {
     display: none; 
 }
-/* 1. Ustawiamy sztywny rozmiar całego okna na 800x480 */
+
+* {
+    box-sizing: border-box !important;
+}
+
+
 html, body {
     width: 800px !important;
     height: 480px !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important; /* Blokuje paski przewijania */
+    overflow: hidden !important; 
 }
 
-/* 2. Rozciągamy Twój ciemnoszary kontener z rozkładem na maxa */
+
 body > div {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
+    width: 800px !important;
+    height: 480px !important;
     margin: 0 !important;
-    border-radius: 0 !important; /* Usuwamy zaokrąglone rogi, bo przylegają do krawędzi ekranu */
-    box-sizing: border-box !important;
-    padding: 20px !important; /* Dajemy lekki odstęp od ramek ekranu */
-    
-    /* 3. Lupą powiększamy zawartość wewnątrz rozciągniętego bloku */
-    zoom: 1.1; 
+    padding: 15px !important; 
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+
+#odjazdy-lista {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-evenly !important; 
+}
+
+
+#odjazdy-lista li {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 10px 15px !important;
+    margin-bottom: 8px !important;
+}
+
+
+.linia {
+    font-size: 45px !important;
+    min-width: 100px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important; 
+}
+
+.kierunek {
+    font-size: 38px !important;
+    flex-grow: 1 !important;
+    margin: 0 20px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; 
+}
+
+.czas {
+    font-size: 42px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important; 
+    text-align: right !important;
 }
