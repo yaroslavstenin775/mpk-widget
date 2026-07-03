@@ -6,12 +6,14 @@
 
 body {
   overflow: hidden; 
-    height: 100vh;
+width: 800px !important;
+    height: 480px !important;
     background-color: #121212; 
     color: #ffffff;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
+    zoom: 1.4;  
 
 }
 
@@ -123,4 +125,26 @@ h1 {
 
 ::-webkit-scrollbar {
     display: none; 
+}
+/* 1. Ustawiamy sztywny rozmiar całego okna na 800x480 */
+html, body {
+    width: 800px !important;
+    height: 480px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important; /* Blokuje paski przewijania */
+}
+
+/* 2. Rozciągamy Twój ciemnoszary kontener z rozkładem na maxa */
+body > div {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important; /* Usuwamy zaokrąglone rogi, bo przylegają do krawędzi ekranu */
+    box-sizing: border-box !important;
+    padding: 20px !important; /* Dajemy lekki odstęp od ramek ekranu */
+    
+    /* 3. Lupą powiększamy zawartość wewnątrz rozciągniętego bloku */
+    zoom: 1.1; 
 }
