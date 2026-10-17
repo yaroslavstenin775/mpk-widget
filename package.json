@@ -1,0 +1,25 @@
+{
+  "name": "mpk-widget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaroslavstenin775/mpk-widget.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yaroslavstenin775/mpk-widget/issues"
+  },
+  "homepage": "https://github.com/yaroslavstenin775/mpk-widget#readme",
+  "dependencies": {
+    "adm-zip": "^0.6.1",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "gtfs-realtime-bindings": "^2.2.0"
+  }
+}

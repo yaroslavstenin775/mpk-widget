@@ -9,13 +9,92 @@
 </head>
 <body>
     <div id="widget">
-        <h1> Piaski Wielkie</h1>
-        <div id="odjazdy-lista">
-            Ładowanie danych...
-        </div>
+        <header class="widget-header">
+            <div class="station-mark" aria-hidden="true">
+                <img src="fat.jpg" alt="">
+            </div>
+            <div class="station-copy">
+                <h1> Piaski Wielkie</h1>
+                <span class="station-rule" aria-hidden="true"></span>
+            </div>
+            <div class="header-time" aria-label="Aktualny czas">
+                <span>TERAZ</span>
+                <strong id="header-clock">--:--</strong>
+            </div>
+        </header>
+
+        <main>
+            <section class="overview-grid" aria-label="Informacje dodatkowe">
+                <article class="info-card clock-card">
+                    <div class="card-heading">
+                        <span class="heading-icon clock-icon" aria-hidden="true"></span>
+                        <span>CZAS SYSTEMOWY</span>
+                        <span class="card-chip">LOKALNIE</span>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="clock-value" id="system-clock">--:--:--</div>
+                    <div class="clock-date" id="system-date">Ładowanie daty...</div>
+                    <div class="card-footer">
+                        <span class="status-label"><i></i> Aktualny czas</span>
+                        <span id="clock-zone">Europe/Warsaw</span>
+                    </div>
+                </article>
+
+                <article class="info-card weather-card">
+                    <div class="card-heading">
+                        <span class="heading-icon weather-icon-small" aria-hidden="true">°</span>
+                        <span>POGODA</span>
+                        <span class="card-chip weather-location">KRAKÓW</span>
+                    </div>
+                    <div class="card-divider"></div>
+                    <div class="weather-main">
+                        <div class="weather-temperature" id="weather-temperature">--°</div>
+                        <div class="weather-symbol" id="weather-symbol" aria-hidden="true">
+                            <svg viewBox="0 0 64 64" role="presentation">
+                                <circle cx="39" cy="25" r="11"></circle>
+                                <path d="M39 7v6M39 37v6M21 25h-6M57 25h-6M26.3 12.3l-4.2-4.2M51 42l-4.3-4.3M51.7 12.3l4.2-4.2M26.3 37.7 22 42" />
+                                <path d="M16 50h31a8 8 0 0 0 0-16 11 11 0 0 0-21-2 9 9 0 0 0-10 9 9 9 0 0 0 0 9Z" class="weather-cloud" />
+                            </svg>
+                        </div>
+                        <div class="weather-copy">
+                            <strong id="weather-description">Ładowanie...</strong>
+                            <span id="weather-feels">Odczuwalna --°</span>
+                        </div>
+                    </div>
+                    <div class="weather-stats">
+                        <span><small>WILGOTNOŚĆ</small><strong id="weather-humidity">--%</strong></span>
+                        <span><small>WIATR</small><strong id="weather-wind">-- km/h</strong></span>
+                        <span><small>ŹRÓDŁO</small><strong>Open-Meteo</strong></span>
+                    </div>
+                </article>
+            </section>
+
+            <section class="departures-card" aria-label="Odjazdy">
+                <div class="departures-title">
+                    <div class="title-with-icon">
+                        <span class="bus-title-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" role="presentation">
+                                <path d="M6 18h12M6 5h12a2 2 0 0 1 2 2v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                                <path d="M4.5 11h15M8 8h.01M16 8h.01M8 21v-3M16 21v-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <h2>Najbliższe odjazdy</h2>
+                    </div>
+                    <span class="refresh-indicator"><i></i> Aktualizowane automatycznie</span>
+                </div>
+                <div class="departures-columns" aria-hidden="true">
+                    <span>LINIA</span>
+                    <span>KIERUNEK</span>
+                    <span>CZAS ODJAZDU</span>
+                    <span>ŹRÓDŁO</span>
+                </div>
+                <div id="odjazdy-lista">
+                    Ładowanie danych...
+                </div>
+            </section>
+        </main>
     </div>
 
     <script src="script.js" defer></script>
 </body>
 </html>
-

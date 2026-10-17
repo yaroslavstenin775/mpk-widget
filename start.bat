@@ -1,3 +1,0 @@
-@echo off
-echo Uruchamianie widzetu MPK...
-start chrome --disable-web-security --user-data-dir="%TEMP%\mpk_kiosk" "%~dp0index.html"

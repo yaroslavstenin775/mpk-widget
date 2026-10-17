@@ -4,129 +4,995 @@
     padding: 0;
 }
 
+:root {
+    --ink: #878b93;
+    --ink-dark: #777c85;
+    --muted: #a9aeb7;
+    --faint: #c1c5cc;
+    --line: rgba(126, 135, 148, 0.28);
+    --blue: #72abe8;
+    --blue-soft: #eaf3ff;
+    --green: #8edbb1;
+    --orange: #f5bb63;
+    --panel: rgba(255, 255, 255, 0.66);
+}
+
+html {
+    min-width: 320px;
+    background: #f4f7fc;
+}
+
 body {
-  overflow: hidden; 
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+        radial-gradient(circle at 15% 6%, rgba(216, 233, 255, 0.74), transparent 34%),
+        radial-gradient(circle at 86% 72%, rgba(255, 255, 255, 0.9), transparent 40%),
+        linear-gradient(135deg, #f1f6fd 0%, #ffffff 48%, #f6f8fc 100%);
+}
 
-    background-color: #121212; 
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    zoom: 1.4;  
-
+body::before {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    opacity: 0.32;
+    background-image: linear-gradient(rgba(151, 163, 180, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(151, 163, 180, 0.045) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(to bottom, black, transparent 82%);
 }
 
 #widget {
+    width: min(1180px, calc(100% - 42px));
+    margin: 0 auto;
+    padding: 32px 0 44px;
+}
+
+.widget-header,
+.info-card,
+.departures-card {
+    border: 1px solid rgba(143, 153, 168, 0.2);
+    background: var(--panel);
+    box-shadow: 0 20px 46px rgba(111, 132, 162, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.76);
+    backdrop-filter: blur(16px);
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    min-height: 104px;
+    padding: 20px 25px;
+    border-radius: 27px;
+}
+
+.station-mark {
+    display: grid;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    margin-right: 16px;
+    color: #fff;
+    place-items: center;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #80b9f0, #679bd4);
+    box-shadow: 0 9px 18px rgba(91, 145, 206, 0.16);
+}
+
+.station-mark svg {
+    width: 34px;
+    height: 34px;
+}
+
+.station-mark img {
     width: 100%;
-    max-width: 600px;
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: inherit;
+}
+
+.station-copy {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 14px;
 }
 
 h1 {
-    color: #ff9800; 
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
-    margin-bottom: 12px;
-    font-size: 20px;
+    overflow: hidden;
+    color: var(--ink-dark);
+    font-size: clamp(21px, 2.3vw, 28px);
+    font-weight: 720;
+    letter-spacing: -0.04em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.station-rule {
+    display: block;
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 5px rgba(142, 219, 177, 0.13);
+}
+
+.header-time {
+    display: flex;
+    align-items: baseline;
+    margin-left: auto;
+    padding-left: 24px;
+    color: var(--muted);
+    gap: 10px;
+}
+
+.header-time span,
+.card-heading,
+.departures-columns,
+.weather-stats small {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.header-time strong {
+    color: var(--ink-dark);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+main {
+    display: grid;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.info-card {
+    min-height: 254px;
+    padding: 24px 25px 20px;
+    border-radius: 27px;
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    min-height: 22px;
+    color: #b2b6be;
+    gap: 8px;
+}
+
+.heading-icon {
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+}
+
+.clock-icon {
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+}
+
+.clock-icon::after {
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 1px;
+    height: 5px;
+    content: "";
+    background: var(--blue);
+    transform-origin: bottom;
+    transform: rotate(-12deg);
+}
+
+.clock-icon::before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 4px;
+    height: 1px;
+    content: "";
+    background: var(--blue);
+    transform: rotate(35deg);
+    transform-origin: left center;
+}
+
+.weather-icon-small {
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 14px;
+}
+
+.card-chip {
+    margin-left: auto;
+    padding: 4px 9px;
+    color: #aeb4bd;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    border-radius: 8px;
+    background: rgba(242, 245, 249, 0.9);
+}
+
+.weather-location {
+    color: #83c99f;
+    background: rgba(229, 249, 237, 0.78);
+}
+
+.card-divider {
+    height: 1px;
+    margin: 13px 0 19px;
+    background: var(--line);
+}
+
+.clock-value {
+    color: #888d96;
+    font-size: clamp(55px, 7vw, 78px);
+    font-weight: 680;
+    letter-spacing: -0.075em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.clock-date {
+    margin-top: 9px;
+    color: #b1b6bf;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    padding-top: 16px;
+    color: #9da3ad;
+    font-size: 13px;
+    border-top: 1px solid var(--line);
+}
+
+.status-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.status-label i,
+.refresh-indicator i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+}
+
+.weather-main {
+    display: grid;
+    grid-template-columns: auto 78px minmax(0, 1fr);
+    align-items: center;
+    min-height: 79px;
+    gap: 17px;
+}
+
+.weather-temperature {
+    color: #858a93;
+    font-size: 61px;
+    font-weight: 700;
+    letter-spacing: -0.075em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.weather-symbol {
+    width: 70px;
+    height: 70px;
+    color: #f7bf69;
+}
+
+.weather-symbol svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.4;
+}
+
+.weather-symbol .weather-cloud {
+    fill: rgba(255, 255, 255, 0.5);
+}
+
+.weather-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.weather-copy strong {
+    overflow: hidden;
+    color: var(--ink-dark);
+    font-size: 15px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.weather-copy span {
+    color: #b0b5bd;
+    font-size: 13px;
+}
+
+.weather-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.weather-stats span {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 7px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(215, 218, 224, 0.72);
+}
+
+.weather-stats small {
+    overflow: hidden;
+    color: #b0b4bc;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.weather-stats strong {
+    overflow: hidden;
+    color: #858a93;
+    font-size: 14px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.departures-card {
+    overflow: hidden;
+    border-radius: 27px;
+}
+
+.departures-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 62px;
+    padding: 16px 25px 10px;
+}
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bus-title-icon {
+    display: grid;
+    width: 20px;
+    height: 20px;
+    color: var(--blue);
+    place-items: center;
+}
+
+.bus-title-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+h2 {
+    color: #858a93;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.refresh-indicator {
+    display: inline-flex;
+    align-items: center;
+    color: #b2b6be;
+    font-size: 12px;
+    gap: 8px;
+}
+
+.departures-columns,
+.odjazd {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr) 130px 76px;
+    column-gap: 18px;
+}
+
+.departures-columns {
+    align-items: center;
+    min-height: 37px;
+    padding: 0 23px;
+    color: #b3b7be;
+    background: rgba(211, 214, 220, 0.62);
+}
+
+.departures-columns span:nth-child(3) {
+    text-align: right;
+}
+
+.departures-columns span:nth-child(4) {
+    text-align: center;
+}
+
+#odjazdy-lista {
+    color: var(--muted);
 }
 
 .odjazd {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #333;
-    font-size: 18px; 
+    min-height: 76px;
+    padding: 10px 23px;
+    border-bottom: 1px solid var(--line);
+    transition: background-color 180ms ease;
 }
 
+.odjazd:hover {
+    background: rgba(241, 247, 255, 0.62);
+}
 
 .odjazd:last-child {
     border-bottom: none;
 }
 
 .linia {
-    background-color: #ff9800;
-    color: #000;
-    font-weight: bold;
-    padding: 5px 15px;
-    border-radius: 5px;
-    min-width: 60px;
-    text-align: center;
+    display: inline-grid;
+    min-width: 48px;
+    min-height: 38px;
+    padding: 3px 7px;
+    color: var(--blue);
+    font-size: 16px;
+    font-weight: 750;
+    place-items: center;
+    border-radius: 13px;
+    background: var(--blue-soft);
+}
+
+.odjazd:nth-child(3n + 2) .linia {
+    color: var(--orange);
+    background: #fff7e9;
+}
+
+.odjazd:nth-child(3n + 3) .linia {
+    color: #959ba5;
+    background: #f1f3f7;
 }
 
 .kierunek {
-    flex-grow: 1;
-    margin-left: 20px;
-    font-weight: bold;
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    color: #858a93;
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.25;
+}
+
+.opoznienie {
+    margin-top: 4px;
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 600;
 }
 
 .czas {
-    color: #4caf50; 
-    font-weight: bold;
-    min-width: 90px; 
-    text-align: right; 
-    font-family: 'Courier New', Courier, monospace; 
-    font-variant-numeric: tabular-nums; 
-    padding-left: 10px;
+    color: #858a93;
+    font-size: 18px;
+    font-weight: 720;
+    line-height: 1.2;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
 }
 
 .kropka-api,
 .kropka-lokalna {
-  position: relative;
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-left: 12px;
-  flex-shrink: 0;
-  cursor: default;
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
+    border-radius: 50%;
+    cursor: default;
 }
 
 .kropka-api {
-  background-color: #4caf50;
+    background: var(--green);
+    box-shadow: 0 0 0 4px rgba(142, 219, 177, 0.14);
 }
 
 .kropka-lokalna {
-  background-color: #2196f3;
+    background: var(--blue);
+    box-shadow: 0 0 0 4px rgba(114, 171, 232, 0.14);
 }
 
 .kropka-api::after,
 .kropka-lokalna::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 150%;
-  right: 0;
-  background-color: #333;
-  color: #fff;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 13px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
+    position: absolute;
+    right: 20px;
+    bottom: calc(100% - 6px);
+    z-index: 2;
+    padding: 6px 9px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    content: attr(data-tooltip);
+    opacity: 0;
+    border-radius: 7px;
+    background: #7d838d;
+    box-shadow: 0 7px 17px rgba(68, 76, 89, 0.18);
+    transform: translateY(4px);
+    transition: opacity 160ms ease, transform 160ms ease;
 }
 
+.kropka-api:hover::after,
+.kropka-lokalna:hover::after,
 .kropka-api.aktywny::after,
 .kropka-lokalna.aktywny::after {
-  opacity: 1;
-}
-.opoznienie {
-  display: block;
-  font-size: 14px;
-  font-weight: normal;
-  color: #f44336;
-  margin-top: 3px;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 ::-webkit-scrollbar {
-    display: none; 
+    width: 0;
+    height: 0;
 }
 
-* {
-    box-sizing: border-box !important;
+@media (max-width: 760px) {
+    #widget {
+        width: min(100% - 24px, 620px);
+        padding-top: 12px;
+    }
+
+    .widget-header {
+        min-height: 82px;
+        padding: 14px 16px;
+        border-radius: 21px;
+    }
+
+    .station-mark {
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+        margin-right: 12px;
+        border-radius: 14px;
+    }
+
+    .station-mark svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .station-mark img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .header-time {
+        display: none;
+    }
+
+    main,
+    .overview-grid {
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        min-height: 0;
+        padding: 19px 17px 17px;
+        border-radius: 21px;
+    }
+
+    .clock-value {
+        font-size: clamp(54px, 16vw, 75px);
+    }
+
+    .departures-card {
+        border-radius: 21px;
+    }
+
+    .departures-title {
+        align-items: flex-start;
+        flex-direction: column;
+        min-height: 77px;
+        padding: 16px 17px 11px;
+        gap: 9px;
+    }
+
+    .departures-columns,
+    .odjazd {
+        grid-template-columns: 52px minmax(0, 1fr) 78px 22px;
+        column-gap: 10px;
+    }
+
+    .departures-columns {
+        padding: 0 14px;
+        font-size: 9px;
+    }
+
+    .departures-columns span:nth-child(4) {
+        overflow: hidden;
+        font-size: 0;
+    }
+
+    .odjazd {
+        min-height: 73px;
+        padding: 9px 14px;
+    }
+
+    .linia {
+        min-width: 42px;
+        min-height: 34px;
+        font-size: 14px;
+    }
+
+    .kierunek {
+        font-size: 14px;
+    }
+
+    .czas {
+        font-size: 16px;
+    }
+
+    .kropka-api,
+    .kropka-lokalna {
+        width: 8px;
+        height: 8px;
+    }
+
+    .weather-main {
+        grid-template-columns: auto 61px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .weather-temperature {
+        font-size: 53px;
+    }
+
+    .weather-symbol {
+        width: 58px;
+        height: 58px;
+    }
+
+    .weather-stats {
+        gap: 6px;
+    }
+
+    .weather-stats span {
+        padding: 9px 8px;
+    }
 }
 
+@media (max-width: 430px) {
+    .station-copy {
+        min-width: 0;
+    }
+
+    h1 {
+        max-width: calc(100vw - 115px);
+        font-size: 20px;
+    }
+
+    .card-footer {
+        font-size: 11px;
+    }
+
+    .weather-main {
+        grid-template-columns: auto 54px minmax(0, 1fr);
+    }
+
+    .weather-copy strong {
+        font-size: 13px;
+    }
+
+    .weather-copy span {
+        font-size: 11px;
+    }
+
+    .weather-stats strong {
+        font-size: 12px;
+    }
+}
+
+/* Układ dla Raspberry Pi z ekranem 800 x 480. */
+@media (min-width: 761px) and (max-width: 900px) and (max-height: 560px) {
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #widget {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        width: calc(100% - 18px);
+        height: 100vh;
+        padding: 8px 0;
+    }
+
+    .widget-header {
+        min-height: 58px;
+        height: 58px;
+        padding: 8px 13px;
+        border-radius: 17px;
+    }
+
+    .station-mark {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        margin-right: 11px;
+        border-radius: 12px;
+    }
+
+    .station-mark svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .station-mark img {
+        width: 100%;
+        height: 100%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .header-time {
+        display: none;
+    }
+
+    main {
+        grid-template-rows: 136px minmax(0, 1fr);
+        min-height: 0;
+        margin-top: 9px;
+        gap: 9px;
+    }
+
+    .overview-grid {
+        min-height: 0;
+        gap: 9px;
+    }
+
+    .info-card {
+        min-height: 0;
+        height: 136px;
+        padding: 12px 13px 10px;
+        border-radius: 17px;
+    }
+
+    .card-heading {
+        min-height: 15px;
+        font-size: 8px;
+        gap: 5px;
+    }
+
+    .heading-icon {
+        width: 11px;
+        height: 11px;
+        flex-basis: 11px;
+    }
+
+    .clock-icon::after {
+        top: 2px;
+        left: 4px;
+        height: 4px;
+    }
+
+    .clock-icon::before {
+        top: 4px;
+        left: 4px;
+        width: 3px;
+    }
+
+    .weather-icon-small {
+        font-size: 11px;
+        line-height: 11px;
+    }
+
+    .card-chip {
+        padding: 3px 6px;
+        font-size: 7px;
+        border-radius: 6px;
+    }
+
+    .card-divider {
+        margin: 6px 0 8px;
+    }
+
+    .clock-value {
+        font-size: 37px;
+        letter-spacing: -0.07em;
+    }
+
+    .clock-date {
+        margin-top: 3px;
+        font-size: 10px;
+    }
+
+    .card-footer {
+        margin-top: 7px;
+        padding-top: 7px;
+        font-size: 10px;
+    }
+
+    .status-label {
+        gap: 4px;
+    }
+
+    .status-label i,
+    .refresh-indicator i {
+        width: 5px;
+        height: 5px;
+    }
+
+    .weather-main {
+        grid-template-columns: auto 45px minmax(0, 1fr);
+        min-height: 43px;
+        gap: 7px;
+    }
+
+    .weather-temperature {
+        font-size: 38px;
+    }
+
+    .weather-symbol {
+        width: 42px;
+        height: 42px;
+    }
+
+    .weather-copy {
+        gap: 2px;
+    }
+
+    .weather-copy strong {
+        font-size: 12px;
+    }
+
+    .weather-copy span {
+        font-size: 10px;
+    }
+
+    .weather-stats {
+        gap: 5px;
+        margin-top: 5px;
+    }
+
+    .weather-stats span {
+        gap: 3px;
+        padding: 5px 7px;
+        border-radius: 9px;
+    }
+
+    .weather-stats small {
+        font-size: 7px;
+    }
+
+    .weather-stats strong {
+        font-size: 10px;
+    }
+
+    .departures-card {
+        display: flex;
+        min-height: 0;
+        flex-direction: column;
+        border-radius: 17px;
+    }
+
+    .departures-title {
+        min-height: 36px;
+        height: 36px;
+        padding: 7px 13px 5px;
+    }
+
+    .title-with-icon {
+        gap: 6px;
+    }
+
+    .bus-title-icon,
+    .bus-title-icon svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    h2 {
+        font-size: 12px;
+    }
+
+    .refresh-indicator {
+        font-size: 9px;
+        gap: 4px;
+    }
+
+    .departures-columns,
+    .odjazd {
+        grid-template-columns: 48px minmax(0, 1fr) 74px 18px;
+        column-gap: 7px;
+    }
+
+    .departures-columns {
+        min-height: 22px;
+        height: 22px;
+        padding: 0 12px;
+        font-size: 7px;
+    }
+
+    .odjazd {
+        min-height: 52px;
+        padding: 6px 12px;
+    }
+
+    .linia {
+        min-width: 35px;
+        min-height: 28px;
+        padding: 2px 5px;
+        font-size: 12px;
+        border-radius: 9px;
+    }
+
+    .kierunek {
+        max-height: 31px;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 1.15;
+    }
+
+    .opoznienie {
+        overflow: hidden;
+        margin-top: 2px;
+        font-size: 9px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .czas {
+        font-size: 13px;
+    }
+
+    .kropka-api,
+    .kropka-lokalna {
+        width: 7px;
+        height: 7px;
+    }
+
+    #odjazdy-lista {
+        min-height: 0;
+        overflow-y: auto;
+    }
+}

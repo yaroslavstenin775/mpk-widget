@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=MPK Widget
+Comment=Automatyczny start widgetu MPK
+Exec=/home/pi/mpk-widget/start.sh
+Terminal=false
+X-GNOME-Autostart-enabled=true

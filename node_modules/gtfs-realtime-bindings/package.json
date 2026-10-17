@@ -1,0 +1,42 @@
+{
+    "author": "MobilityData",
+    "name": "gtfs-realtime-bindings",
+    "engines": {
+        "node": ">=22"
+    },
+    "description": "Javascript classes generated from the GTFS-realtime protocol buffer specification.",
+    "tags": [
+        "gtfs-realtime"
+    ],
+    "version": "2.2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MobilityData/gtfs-realtime-bindings.git"
+    },
+    "bugs": {
+        "url": "https://github.com/MobilityData/gtfs-realtime-bindings/issues"
+    },
+    "main": "gtfs-realtime.js",
+    "types": "gtfs-realtime.d.ts",
+    "scripts": {
+        "test": "mocha test/*.js",
+        "buildProto": "pbjs -t static-module -w commonjs -o gtfs-realtime.js ../gtfs-realtime.proto && pbts -o gtfs-realtime.d.ts gtfs-realtime.js"
+    },
+    "dependencies": {
+        "protobufjs": "^8.2.1",
+        "protobufjs-cli": "^2.2.1"
+    },
+    "devDependencies": {
+        "mocha": "^11.7.5",
+        "should": "^13.2.3"
+    },
+    "licenses": [
+        {
+            "type": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0"
+        }
+    ],
+    "publishConfig": {
+        "provenance": true
+    }
+}
