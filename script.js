@@ -61,6 +61,37 @@ async function pobierzPogode() {
   }
 }
 
+function obliczMinutyDoOdjazdu(godzina, teraz) {
+  const [godziny, minuty] = godzina.split(':').map(Number);
+  const planowany = new Date(teraz);
+  planowany.setHours(godziny, minuty, 0, 0);
+
+  let roznica = Math.round((planowany.getTime() - teraz.getTime()) / 60000);
+  if (roznica < 0) roznica += 24 * 60;
+  return roznica;
+}
+
+function tekstOdjazdu(autobus, teraz) {
+  const minuty = autobus.departureTime
+    ? Math.round((autobus.departureTime * 1000 - teraz.getTime()) / 60000)
+    : obliczMinutyDoOdjazdu(autobus.mixedTime, teraz);
+
+  if (minuty > 60) return autobus.mixedTime;
+  return minuty <= 0 ? 'teraz' : `${minuty} min`;
+}
+
+const showAllButton = document.getElementById('show-all-button');
+const departuresCard = document.querySelector('.departures-card');
+
+function przelaczWszystkieOdjazdy() {
+  const otwarte = departuresCard.classList.toggle('show-all');
+  document.body.classList.toggle('departures-expanded', otwarte);
+  showAllButton.textContent = otwarte ? 'Zamknij' : 'Wszystkie odjazdy';
+  showAllButton.setAttribute('aria-expanded', String(otwarte));
+}
+
+showAllButton.addEventListener('click', przelaczWszystkieOdjazdy);
+
 const rozklad133 = {
     robocze: ["04:36", "05:09", "05:38", "06:09", "07:09", "07:39", "08:09", "08:39", "09:09", "09:39", "10:09", "10:39", "11:09", "11:39", "12:09", "12:39", "13:09", "13:39", "14:09", "14:39", "15:10", "15:40", "16:10", "16:40", "17:10", "17:40", "18:10", "18:40", "19:16", "19:56", "20:36", "21:16", "21:56", "22:36", "23:16"],
     sobota: ["04:36", "05:16", "05:56", "06:36", "07:16", "07:56", "08:36", "09:16", "09:56", "10:36", "11:16", "11:56", "12:36", "13:16", "13:56", "14:36", "15:16", "15:56", "16:36", "17:16", "17:56", "18:36", "19:16", "19:56", "20:36", "21:16", "21:56", "22:41", "23:21"],
@@ -107,6 +138,7 @@ async function pobierzOdjazdy() {
             patternText: a.patternText,
             direction: a.direction,
             mixedTime: `${godziny}:${minuty}`,
+            departureTime: a.departureTime,
             opoznienieMinuty: a.delay,
             zrodlo: 'api'
         };
@@ -161,7 +193,7 @@ async function pobierzOdjazdy() {
       element.innerHTML = `
         <span class="linia">${autobus.patternText}</span>
         <span class="kierunek">${autobus.direction}${opoznienieHTML}</span>
-        <span class="czas">${autobus.mixedTime}</span>
+        <span class="czas">${tekstOdjazdu(autobus, teraz)}</span>
         <span class="${klasaKropki}" data-tooltip="${tytulKropki}"></span>
       `;
 
