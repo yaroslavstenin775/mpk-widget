@@ -121,30 +121,12 @@ h1 {
     box-shadow: 0 0 0 5px rgba(142, 219, 177, 0.13);
 }
 
-.header-time {
-    display: flex;
-    align-items: baseline;
-    margin-left: auto;
-    padding-left: 24px;
-    color: var(--muted);
-    gap: 10px;
-}
-
-.header-time span,
 .card-heading,
 .departures-columns,
 .weather-stats small {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
-}
-
-.header-time strong {
-    color: var(--ink-dark);
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    font-variant-numeric: tabular-nums;
 }
 
 main {
@@ -160,8 +142,11 @@ main {
 }
 
 .info-card {
-    min-height: 254px;
-    padding: 24px 25px 20px;
+    display: flex;
+    min-height: 104px;
+    padding: 12px 25px;
+    flex-direction: column;
+    justify-content: center;
     border-radius: 27px;
 }
 
@@ -240,7 +225,7 @@ main {
 
 .clock-value {
     color: #888d96;
-    font-size: clamp(55px, 7vw, 78px);
+    font-size: clamp(42px, 5vw, 56px);
     font-weight: 680;
     letter-spacing: -0.075em;
     line-height: 1;
@@ -248,9 +233,9 @@ main {
 }
 
 .clock-date {
-    margin-top: 9px;
+    margin-top: 3px;
     color: #b1b6bf;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.01em;
 }
@@ -285,13 +270,13 @@ main {
     display: grid;
     grid-template-columns: auto 78px minmax(0, 1fr);
     align-items: center;
-    min-height: 79px;
+    min-height: 58px;
     gap: 17px;
 }
 
 .weather-temperature {
     color: #858a93;
-    font-size: 61px;
+    font-size: 48px;
     font-weight: 700;
     letter-spacing: -0.075em;
     line-height: 1;
@@ -470,7 +455,7 @@ h2 {
     min-height: 38px;
     padding: 3px 7px;
     color: var(--blue);
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 750;
     place-items: center;
     border-radius: 13px;
@@ -492,7 +477,7 @@ h2 {
     min-width: 0;
     flex-direction: column;
     color: #858a93;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 650;
     line-height: 1.25;
 }
@@ -500,13 +485,13 @@ h2 {
 .opoznienie {
     margin-top: 4px;
     color: var(--orange);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
 }
 
 .czas {
     color: #858a93;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 720;
     line-height: 1.2;
     text-align: right;
@@ -595,10 +580,6 @@ h2 {
     .station-mark img {
         width: 100%;
         height: 100%;
-    }
-
-    .header-time {
-        display: none;
     }
 
     main,
@@ -774,12 +755,8 @@ h2 {
         font-size: 20px;
     }
 
-    .header-time {
-        display: none;
-    }
-
     main {
-        grid-template-rows: 136px minmax(0, 1fr);
+        grid-template-rows: 64px minmax(0, 1fr);
         min-height: 0;
         margin-top: 9px;
         gap: 9px;
@@ -792,8 +769,8 @@ h2 {
 
     .info-card {
         min-height: 0;
-        height: 136px;
-        padding: 12px 13px 10px;
+        height: 64px;
+        padding: 5px 13px;
         border-radius: 17px;
     }
 
@@ -837,13 +814,13 @@ h2 {
     }
 
     .clock-value {
-        font-size: 37px;
+        font-size: 24px;
         letter-spacing: -0.07em;
     }
 
     .clock-date {
         margin-top: 3px;
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .card-footer {
@@ -864,17 +841,17 @@ h2 {
 
     .weather-main {
         grid-template-columns: auto 45px minmax(0, 1fr);
-        min-height: 43px;
+        min-height: 45px;
         gap: 7px;
     }
 
     .weather-temperature {
-        font-size: 38px;
+        font-size: 30px;
     }
 
     .weather-symbol {
-        width: 42px;
-        height: 42px;
+        width: 36px;
+        height: 36px;
     }
 
     .weather-copy {
@@ -882,11 +859,11 @@ h2 {
     }
 
     .weather-copy strong {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .weather-copy span {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .weather-stats {
@@ -950,7 +927,7 @@ h2 {
         min-height: 22px;
         height: 22px;
         padding: 0 12px;
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .odjazd {
@@ -962,27 +939,27 @@ h2 {
         min-width: 35px;
         min-height: 28px;
         padding: 2px 5px;
-        font-size: 12px;
+        font-size: 14px;
         border-radius: 9px;
     }
 
     .kierunek {
-        max-height: 31px;
+        max-height: 33px;
         overflow: hidden;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.15;
     }
 
     .opoznienie {
         overflow: hidden;
         margin-top: 2px;
-        font-size: 9px;
+        font-size: 10px;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
     .czas {
-        font-size: 13px;
+        font-size: 16px;
     }
 
     .kropka-api,

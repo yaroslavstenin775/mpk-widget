@@ -17,36 +17,16 @@
                 <h1> Piaski Wielkie</h1>
                 <span class="station-rule" aria-hidden="true"></span>
             </div>
-            <div class="header-time" aria-label="Aktualny czas">
-                <span>TERAZ</span>
-                <strong id="header-clock">--:--</strong>
-            </div>
         </header>
 
         <main>
             <section class="overview-grid" aria-label="Informacje dodatkowe">
                 <article class="info-card clock-card">
-                    <div class="card-heading">
-                        <span class="heading-icon clock-icon" aria-hidden="true"></span>
-                        <span>CZAS SYSTEMOWY</span>
-                        <span class="card-chip">LOKALNIE</span>
-                    </div>
-                    <div class="card-divider"></div>
                     <div class="clock-value" id="system-clock">--:--:--</div>
                     <div class="clock-date" id="system-date">Ładowanie daty...</div>
-                    <div class="card-footer">
-                        <span class="status-label"><i></i> Aktualny czas</span>
-                        <span id="clock-zone">Europe/Warsaw</span>
-                    </div>
                 </article>
 
                 <article class="info-card weather-card">
-                    <div class="card-heading">
-                        <span class="heading-icon weather-icon-small" aria-hidden="true">°</span>
-                        <span>POGODA</span>
-                        <span class="card-chip weather-location">KRAKÓW</span>
-                    </div>
-                    <div class="card-divider"></div>
                     <div class="weather-main">
                         <div class="weather-temperature" id="weather-temperature">--°</div>
                         <div class="weather-symbol" id="weather-symbol" aria-hidden="true">
@@ -60,11 +40,6 @@
                             <strong id="weather-description">Ładowanie...</strong>
                             <span id="weather-feels">Odczuwalna --°</span>
                         </div>
-                    </div>
-                    <div class="weather-stats">
-                        <span><small>WILGOTNOŚĆ</small><strong id="weather-humidity">--%</strong></span>
-                        <span><small>WIATR</small><strong id="weather-wind">-- km/h</strong></span>
-                        <span><small>ŹRÓDŁO</small><strong>Open-Meteo</strong></span>
                     </div>
                 </article>
             </section>

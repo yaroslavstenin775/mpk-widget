@@ -31,7 +31,6 @@ function aktualizujZegar() {
     minute: '2-digit',
     second: '2-digit'
   });
-  const godzinyMinuty = czas.slice(0, 5);
   const data = teraz.toLocaleDateString('pl-PL', {
     weekday: 'long',
     day: 'numeric',
@@ -39,7 +38,6 @@ function aktualizujZegar() {
     year: 'numeric'
   });
 
-  document.getElementById('header-clock').textContent = godzinyMinuty;
   document.getElementById('system-clock').textContent = czas;
   document.getElementById('system-date').textContent = data.charAt(0).toUpperCase() + data.slice(1);
 }
@@ -48,11 +46,9 @@ async function pobierzPogode() {
   const temperatura = document.getElementById('weather-temperature');
   const opis = document.getElementById('weather-description');
   const odczuwalna = document.getElementById('weather-feels');
-  const wilgotnosc = document.getElementById('weather-humidity');
-  const wiatr = document.getElementById('weather-wind');
 
   try {
-    const odpowiedz = await fetch('https://api.open-meteo.com/v1/forecast?latitude=50.0647&longitude=19.9450&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=Europe%2FWarsaw');
+    const odpowiedz = await fetch('https://api.open-meteo.com/v1/forecast?latitude=50.0647&longitude=19.9450&current=temperature_2m,apparent_temperature,weather_code&timezone=Europe%2FWarsaw');
     if (!odpowiedz.ok) throw new Error('Nie udało się pobrać pogody');
 
     const dane = await odpowiedz.json();
@@ -60,8 +56,6 @@ async function pobierzPogode() {
     temperatura.textContent = `${Math.round(aktualne.temperature_2m)}°`;
     opis.textContent = opisyPogody[aktualne.weather_code] || 'Aktualne warunki';
     odczuwalna.textContent = `Odczuwalna ${Math.round(aktualne.apparent_temperature)}°`;
-    wilgotnosc.textContent = `${Math.round(aktualne.relative_humidity_2m)}%`;
-    wiatr.textContent = `${Math.round(aktualne.wind_speed_10m)} km/h`;
   } catch (blad) {
     opis.textContent = 'Dane niedostępne';
   }
